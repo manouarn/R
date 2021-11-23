@@ -1,0 +1,62 @@
+---
+title: "Le calcule de la regression linaire mutliple  "
+output:
+  html_notebook: default
+  html_document:
+    df_print: paged
+  pdf_document: default
+---
+
+
+convertire houseprices data frame vers matrice de donnees.
+
+```{r}
+df1 <- data.matrix(houseprices)
+```
+Les donnees X 
+```{r}
+X=df1[,1:2]
+X
+```
+Les donnees de matrice Y
+```{r}
+Y=df1[,3]
+Y
+```
+Ajouter le vecteur des valeurs a 
+1 au premier colonne
+```{r}
+X <- cbind(rep(c(1),15),X)
+X
+```
+Nous avons : 
+\begin{equation}
+    \hat{\beta}=({X^{T}X)}^{-1}X^{T}Y
+\end{equation}
+1.  $({X^{T}X)}$
+```{r}
+m1=t(X)%*%X
+m1
+```
+
+Inverse de : ${(X^{T}X)}^{-1}$
+```{r}
+m2=solve(m1)
+m2
+```
+
+ $m2*X^{T}$
+```{r}
+m3=m2%*%t(X)
+m3
+```
+ m4*Y
+```{r}
+m4=m3%*%Y
+m4
+```
+   `r kableExtra::text_spec("Remarque:", color = "red")`
+   
+   L'operation produit entre deux matrices : `r kableExtra::text_spec(" %*%", color = "blue")`
+
+ 
